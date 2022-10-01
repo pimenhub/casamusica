@@ -14,12 +14,13 @@ $consulta = "SELECT x.id_articulo,
             ON x.id_categoria_fk = y.id_categoria 
             WHERE x.id_estado_articulo_fk = 1
                           AND x.id_articulo = $idArticulo";
-$accion = mysqli_query($conexion,$consulta);
+$accion = mysqli_query($conexion, $consulta);
 $row = mysqli_fetch_array($accion);
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -32,30 +33,11 @@ $row = mysqli_fetch_array($accion);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
+
 <body>
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <?php
-                    if(isset($_GET['r']) && $_GET['r'] == '0'){
-                ?>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Warning!</strong> Debe de llenar todos los campos.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php
-                    }
-                ?>
-                <?php
-                    if(isset($_GET['r']) && $_GET['r'] == '1'){
-                ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Succes!</strong> Articulo Registrado Correctamente.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <?php
-                    }
-                ?>
                 <div class="card">
                     <div class="card-header bg-warning">
                         Actualizar Articulo
@@ -68,13 +50,13 @@ $row = mysqli_fetch_array($accion);
                             <input type="text" class="form-control" name="nombreArticulo" placeholder="Nombre de Articulo" value="<?= $row['nombre_articulo'] ?>" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" name="precioArticulo" placeholder="Precio del Articulo" value="<?= $row['precio_articulo'] ?>"  autofocus>
+                            <input type="number" class="form-control" name="precioArticulo" placeholder="Precio del Articulo" value="<?= $row['precio_articulo'] ?>" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" name="costoArticulo" placeholder="Costo del Articulo" value="<?= $row['costo_articulo'] ?>"  autofocus>
+                            <input type="number" class="form-control" name="costoArticulo" placeholder="Costo del Articulo" value="<?= $row['costo_articulo'] ?>" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" name="cantidadArticulo" placeholder="Cantidad del Articulo" value="<?= $row['cantidad_articulo'] ?>"  autofocus>
+                            <input type="number" class="form-control" name="cantidadArticulo" placeholder="Cantidad del Articulo" value="<?= $row['cantidad_articulo'] ?>" autofocus>
                         </div>
                         <div class="mb-3">
                             <textarea type="text" class="form-control" name="descripcionArticulo" placeholder="Descripcion del Articulo" rows="5" autofocus><?= $row['descripcion_articulo'] ?></textarea>
@@ -103,6 +85,7 @@ $row = mysqli_fetch_array($accion);
                 </div>
             </div>
 </body>
+
 </html>
 
 <?php
@@ -110,8 +93,10 @@ include_once("../Conexion/conexion.php");
 
 
 
-if(isset($_POST['nombreArticulo']) && isset($_POST['precioArticulo']) && isset($_POST['costoArticulo'])
-&& isset($_POST['cantidadArticulo']) && isset($_POST['descripcionArticulo']) && isset($_POST['categoriaArticulo'])){
+if (
+    isset($_POST['nombreArticulo']) && isset($_POST['precioArticulo']) && isset($_POST['costoArticulo'])
+    && isset($_POST['cantidadArticulo']) && isset($_POST['descripcionArticulo']) && isset($_POST['categoriaArticulo'])
+) {
 
     $idArticulo = $_POST['idArticulo'];
     $nombreArticulo = $_POST['nombreArticulo'];
@@ -120,9 +105,9 @@ if(isset($_POST['nombreArticulo']) && isset($_POST['precioArticulo']) && isset($
     $cantidadArticulo = $_POST['cantidadArticulo'];
     $descripcionArticulo = $_POST['descripcionArticulo'];
     $categoriaArticulo = $_POST['categoriaArticulo'];
-    $fechaActualizacion = date('Y/m/d', time());//Validar con zona horaria
+    $fechaActualizacion = date('Y/m/d', time()); //Validar con zona horaria
 
-$consulta = "UPDATE articulo SET
+    $consulta = "UPDATE articulo SET
                 nombre_articulo = '$nombreArticulo',
                 descripcion_articulo = '$descripcionArticulo',
                 precio_articulo = $precioArticulo,
@@ -131,17 +116,15 @@ $consulta = "UPDATE articulo SET
                 fecha_actualizado_articulo = '$fechaActualizacion',
                 id_categoria_fk = $categoriaArticulo WHERE id_articulo = $idArticulo";
 
-$accion = mysqli_query($conexion,$consulta);
+    $accion = mysqli_query($conexion, $consulta);
 
-    if($accion){
+    if ($accion) {
         Header("Location: index.php?r=2");
-    }
-    else{
+    } else {
         Header("Location: index.php?r=0");
         mysqli_close($conexion);
     }
-}
-else{
+} else {
     $idArticulo = null;
     $nombreArticulo = null;
     $precioArticulo = null;
