@@ -49,18 +49,8 @@
                 <?php
                 if (isset($_GET['r']) && $_GET['r'] == '1') {
                 ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Succes!</strong> Cliente Registrado Correctamente.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php
-                }
-                ?>
-                <?php
-                if (isset($_GET['r']) && $_GET['r'] == '3') {
-                ?>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Succes!</strong> La Contraseña no es la misma, intente de nuevo.
+                        <strong>Succes!</strong> Usuario o Contraseña Invalidos.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php
@@ -68,42 +58,25 @@
                 ?>
 
                 <div class="card">
-                    <div class="card-header text-white bg-primary">
-                        Registrar Cliente
+                    <div class="card-header text-white bg-success">
+                        Sing in
                     </div>
-                    <form action="insertarCliente.php" method="POST" class="p-4">
+                    <form action="login.php" method="POST" class="p-4">
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="nombreCliente" placeholder="Nombre cliente" autofocus>
+                            <input type="text" class="form-control" name="correoLogin" placeholder="Ingrese su correo" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="apellidoCliente" placeholder="apellido cliente" autofocus>
+                            <input type="password" class="form-control" name="passwordLogin" placeholder="Ingrese su password" autofocus>
                         </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="nitCliente" placeholder="ingrese nit" autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="direccionCliente" placeholder="ingrese direccion" autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <input type="number" class="form-control" name="telefonoCliente" placeholder="ingrese numero de telefono" autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="correoCliente" placeholder="ingrese correo electronico" autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" name="contrasenia" placeholder="ingrese una contraseña" autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" name="confirmarcontrasenia" placeholder="confirme contraseña" autofocus>
-                        </div>
-
                         <div class="d-grid">
-                            <input type="submit" class="btn btn-primary" value="Registrar Datos">
+                            <input type="submit" class="btn btn-success" value="Sing in">
                         </div>
                         <br>
                         <div class="d-grid">
                             <a href="../index.php" class="btn btn-secondary">Cancelar</a>
                         </div>
+                        <br>
+                        <a href="../Cliente/index.php">Si deseas registrarte pulsa aqui...</a>
                     </form>
 
                 </div>

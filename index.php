@@ -42,7 +42,7 @@ $accion = mysqli_query($conexion, $consulta);
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php">Gestion de Articulos</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Administracion/index.php">Administracion de Usuarios</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Cliente/index.php">Registrarte</a>
-                    <a class="py-2 text-dark text-decoration-none" href="#">Sing in</a>
+                    <a class="py-2 text-dark text-decoration-none" href="Login/index.php">Sing in</a>
                 </nav>
             </div>
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -71,12 +71,8 @@ $accion = mysqli_query($conexion, $consulta);
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li><img src="Img/music_shop.jpg" width="100" height="100"></li>
                                     <li><?= $row['descripcion_articulo'] ?></li>
-                                    <!-- <li>10 GB of storage</li>
-                                    <li>Priority email support</li>
-                                    <li>Help center access</li> -->
                                 </ul>
                                 <input type="submit" class="btn btn-primary" value="Agregar al Carrito">
-                                <!-- <button type="submit" class="w-100 btn btn-lg btn-primary">Agregar al Carrito</button> -->
                                 </form>
                             </div>
                         </div>
