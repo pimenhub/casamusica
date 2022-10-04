@@ -1,9 +1,9 @@
 <?php
     //Creamos la conexion con la base de datos de MySQL
     //Variable para la conexion
-    $host = "localhost";
-    $usuario = "root";
-    $contrasenia = "";
+    $host = "intecap-2022.mysql.database.azure.com";
+    $usuario = "pimentel2022@intecap-2022.mysql.database.azure.com";
+    $contrasenia = "Intecap2022.";
     $bd = "dbcasamusica"; 
     $conexion = mysqli_init();
 

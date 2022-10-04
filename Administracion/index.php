@@ -11,6 +11,7 @@ $consulta = "SELECT x.id_usuario,
             INNER JOIN tipo_usuario y
             ON x.id_tipo_usuario_fk = y.id_tipo_usuario
             WHERE x.id_estado_usuario_fk = 1";
+            
 $accion = mysqli_query($conexion,$consulta);
 ?>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@ $accion = mysqli_query($conexion,$consulta);
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-3 py-2 text-dark text-decoration-none" href="../Gestion/index.php">Gestion de Articulos</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="index.php">Administracion de Usuarios</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Cliente/index.php">Registrarte</a>
                     <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>
                 </nav>
         </header>

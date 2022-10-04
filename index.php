@@ -41,8 +41,8 @@ $accion = mysqli_query($conexion, $consulta);
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php">Gestion de Articulos</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Administracion/index.php">Administracion de Usuarios</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
-                    <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Cliente/index.php">Registrarte</a>
+                    <a class="py-2 text-dark text-decoration-none" href="#">Sing in</a>
                 </nav>
             </div>
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">

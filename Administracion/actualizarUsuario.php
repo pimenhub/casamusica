@@ -1,24 +1,21 @@
 <?php
 include_once("../Conexion/conexion.php");
 $idUsuario = $_GET['codigo'];
-$consulta = "SELECT x.id_usuario, 
-                    x.nombre_usuario, 
-                    x.apellido_usuario, 
-                    x.telefono_usuario, 
-                    x.correo_usuario,
-                    x.nick_name_usuario,
-                    x.id_tipo_usuario_fk,
-                    y.nombre_tipo_usuario 
-                    FROM usuario x 
-                    INNER JOIN tipo_usuario y 
-                    ON x.id_tipo_usuario_fk = y.id_tipo_usuario 
-                    WHERE x.id_estado_usuario_fk = 1
-                                AND x.id_usuario = $idUsuario";
+$consulta = "SELECT u.id_usuario, 
+                    u.nombre_usuario, 
+                    u.apellido_usuario, 
+                    u.telefono_usuario, 
+                    u.correo_usuario,
+                    u.nick_name_usuario,
+                    u.id_tipo_usuario_fk,
+                    t.nombre_tipo_usuario,
+                    u.password_usuario
+            FROM usuario u 
+            INNER JOIN tipo_usuario t 
+            ON u.id_tipo_usuario_fk = t.id_tipo_usuario 
+            WHERE u.id_estado_usuario_fk = 1
+                                AND u.id_usuario = $idUsuario";
 $accion = mysqli_query($conexion, $consulta);
-// if (!$accion) {
-//     printf("Error: %s\n", mysqli_error($conexion));
-//     exit();
-// }
 $row = mysqli_fetch_array($accion);
 ?>
 
@@ -42,21 +39,11 @@ $row = mysqli_fetch_array($accion);
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <?php
-                if (isset($_GET['r']) && $_GET['r'] == '0') {
-                ?>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Succes!</strong> La Contraseña no es la misma, intente de nuevo.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php
-                }
-                ?>
                 <div class="card">
                     <div class="card-header bg-warning">
                         Actualizar Usuario
                     </div>
-                    <form action="actualizarUsuario.php" method="POST" class="p-4">
+                    <form action="actualizarRegistroUsuario.php" method="POST" class="p-4">
                         <div class="mb-3">
                             <input type="hidden" class="form-control" name="idUsuario" value="<?= $row['id_usuario'] ?>">
                         </div>
@@ -76,12 +63,23 @@ $row = mysqli_fetch_array($accion);
                             <input type="text" class="form-control" name="nickName" placeholder="Nick Name para el Usuario ej. nombre.apellido" value="<?= $row['nick_name_usuario'] ?>" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" name="passwordUsuario" placeholder="Agregue una Contraseña" value="1" autofocus>
+                            <input type="password" class="form-control" name="passwordUsuario" placeholder="Agregue una Contraseña" value="" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" name="rectificarPasswordUsuario" placeholder="Repita la Contraseña" value="1" autofocus>
+                            <input type="password" class="form-control" name="rectificarPasswordUsuario" placeholder="Repita la Contraseña" value="" autofocus>
                         </div>
-
+                        <div class="mb-3">
+                            <select class="form-select" name="idTipoUsuario">
+                                <option value="<?= $row['id_tipo_usuario_fk'] ?>"><?= $row['nombre_tipo_usuario'] ?></option>
+                                <?php
+                                $idTipoCondicion = $row['id_tipo_usuario_fk'];
+                                $queryTipoUsuario = $conexion->query("SELECT id_tipo_usuario, nombre_tipo_usuario FROM tipo_usuario WHERE id_tipo_usuario != $idTipoCondicion");
+                                while ($valores = mysqli_fetch_array($queryTipoUsuario)) {
+                                    echo '<option value="' . $valores['id_tipo_usuario'] . '">' . $valores['nombre_tipo_usuario'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
                         <div class="d-grid">
                             <input type="submit" class="btn btn-warning" value="Actualizar Usuario">
                         </div>
@@ -95,58 +93,3 @@ $row = mysqli_fetch_array($accion);
             </div>
 </body>
 </html>
-
-<?php
-include_once("../Conexion/conexion.php");
-
-
-if (
-    isset($_POST['nombreUsuario']) && isset($_POST['apellidoUsuario']) && isset($_POST['telefonoUsuario'])
-    && isset($_POST['correoUsuario']) && isset($_POST['nickName']) && isset($_POST['passwordUsuario']) && isset($_POST['rectificarPasswordUsuario'])
-) {
-
-    $idUsuario = $_POST['idUsuario'];
-    $nombreUsuario = $_POST['nombreUsuario'];
-    $apellidoUsuario = $_POST['apellidoUsuario'];
-    $telefonoUsuario = $_POST['telefonoUsuario'];
-    $correoUsuario = $_POST['correoUsuario'];
-    $nickNameUsuario = $_POST['nickName'];
-    $passwordUsuario = $_POST['passwordUsuario'];
-    $idTipoUsuario = 1;
-    $fechaActualizacion = date('Y/m/d', time()); //Validar con zona horaria
-    $rectificarPassUsuario = $_POST['rectificarPasswordUsuario'];
-
-    if ($passwordUsuario === $rectificarPassUsuario) {
-        $consulta = "UPDATE usuario SET nombre_usuario = '$nombreUsuario',
-                apellido_usuario = '$apellidoUsuario',
-                telefono_usuario = '$telefonoUsuario',
-                correo_usuario = '$correoUsuario',
-                nick_name_usuario = '$nickNameUsuario',
-                password_usuario = '$passwordUsuario',
-                fecha_actualizado_usuario = '$fechaActualizacion',
-                id_tipo_usuario_fk = $idTipoUsuario WHERE id_usuario = $idUsuario";
-
-        $accion = mysqli_query($conexion, $consulta);
-
-        if ($accion) {
-            Header("Location: index.php?r=2");
-        } else {
-            Header("Location: index.php?r=0");
-            mysqli_close($conexion);
-        }
-    } else {
-        Header("Location: actualizarUsuario.php?r=0");
-        //mysqli_close($conexion);
-    }
-} else {
-    $idUsuario = null;
-    $nombreUsuario = null;
-    $apellidoUsuario = null;
-    $telefonoUsuario = null;
-    $correoUsuario = null;
-    $nickNameUsuario = null;
-    $passwordUsuario = null;
-    $rectificarPassUsuario = null;
-    $idTipoUsuario = null;
-}
-?>
