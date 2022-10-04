@@ -13,7 +13,7 @@
 
     //Prueba de conexion
     if(!mysqli_connect_error($conexion)){        
-        //echo "Conexion Exitosa...<br>";
+       // echo "Conexion Exitosa...<br>";
     }
     else{
         die("Error de Conexion ". mysqli_connect_error());
