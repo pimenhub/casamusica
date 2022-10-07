@@ -8,6 +8,13 @@ $consulta = "SELECT id_articulo,
                     descripcion_articulo
             FROM articulo WHERE id_estado_articulo_fk = 1";
 $accion = mysqli_query($conexion, $consulta);
+$usuario = "anonimo";
+if (isset($_GET['cod'])){
+    $cod = $_GET['cod'];
+}
+else{
+    $cod = 0;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,10 +46,36 @@ $accion = mysqli_query($conexion, $consulta);
                 </a>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <?php
+                if (isset($_GET['u']) && $_GET['u'] == 'client') {
+                    $usuario = "client";
+                ?>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="Carrito/verCarrito.php?u=<?php echo $usuario?>">Carrito</a>
+                <a class="py-2 text-dark text-decoration-none" href="Login/logout.php">Log out</a>
+                <?php
+                }elseif(isset($_GET['u']) && $_GET['u'] == 'admin'){
+                    $usuario = "admin";
+                ?>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php">Gestion de Articulos</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Administracion/index.php">Administracion de Usuarios</a>
+                    <a class="py-2 text-dark text-decoration-none" href="Login/logout.php">Log out</a>
+                    
+                <?php
+                }elseif(isset($_GET['u']) && $_GET['u'] == 'manager'){
+                    $usuario = "manager";
+                ?>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php">Gestion de Articulos</a>
+                    <a class="py-2 text-dark text-decoration-none" href="Login/logout.php">Log out</a>
+                <?php
+                }else{
+                ?>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Carrito/index.php">Carrito</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Cliente/index.php">Registrarte</a>
                     <a class="py-2 text-dark text-decoration-none" href="Login/index.php">Sing in</a>
+                <?php
+                }
+                ?>
+                   
                 </nav>
             </div>
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -64,7 +97,7 @@ $accion = mysqli_query($conexion, $consulta);
                                 <h1 class="card-title pricing-card-title">Q.<?= $row['precio_articulo'] ?>
                                     <!-- <small class="text-muted fw-light">/mo</small> -->
                                 </h1>
-                                <form action="Carrito/index.php" method="POST">
+                                <form>
                                 <div class="mb-3">
                                     <input type="hidden" class="form-control" name="idArticulo" value="<?= $row['id_articulo'] ?>">
                                 </div>
@@ -72,8 +105,8 @@ $accion = mysqli_query($conexion, $consulta);
                                     <li><img src="Img/music_shop.jpg" width="100" height="100"></li>
                                     <li><?= $row['descripcion_articulo'] ?></li>
                                 </ul>
-                                <input type="submit" class="btn btn-primary" value="Agregar al Carrito">
                                 </form>
+                                <a class="btn btn-success" href="Carrito/accionCarrito.php?action=addToCart&id_articulo=<?php echo $row["id_articulo"]; ?>&u=<?php echo $usuario?>&cod=<?php echo $cod?>">Agregar al Carrito</a>
                             </div>
                         </div>
                     </div>

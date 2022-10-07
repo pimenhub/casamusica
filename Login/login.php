@@ -33,7 +33,9 @@ if (isset($_POST['correoLogin']) && isset($_POST['passwordLogin'])) {
                                    AND password_usuario='$pass' 
                                    AND id_estado_usuario_fk = 1";
 
-        $consultaCliente = "SELECT correo_cliente, 
+        $consultaCliente = "SELECT 
+                                   id_cliente, 
+                                   correo_cliente, 
                                    contrasenia_cliente 
                                    FROM cliente 
                                    WHERE correo_cliente='$uname' 
@@ -50,9 +52,9 @@ if (isset($_POST['correoLogin']) && isset($_POST['passwordLogin'])) {
                 $_SESSION['nombre_tipo_usuario'] = $row['nombre_tipo_usuario'];
 
                 if ($row['id_tipo_usuario_fk'] == 1) {
-                    header("Location: ../index.php");
+                    header("Location: ../index.php?u=admin");
                 } elseif ($row['id_tipo_usuario_fk'] == 2) {
-                    header("Location: ../Gestion/index.php");
+                    header("Location: ../index.php?u=manager");
                 }
                 exit();
             } else {
@@ -63,8 +65,9 @@ if (isset($_POST['correoLogin']) && isset($_POST['passwordLogin'])) {
             $row = mysqli_fetch_assoc($resultCliente);
             if ($row['correo_cliente'] === $uname && $row['contrasenia_cliente'] === $pass) {
                 $_SESSION['correo_cliente'] = $row['correo_cliente'];
+                $_SESSION['id_cliente'] = $row['id_cliente'];
 
-                header("Location: ../index.php?a=cliente");
+                header("Location: ../index.php?u=client&cod=".$row['id_cliente']);
             }
         } else {
             header("Location: index.php?error=Incorect User name or password");
