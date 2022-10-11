@@ -28,10 +28,7 @@
                 </a>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Gestion/index.php">Gestion de Articulos</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Administracion/index.php">Administracion de Usuarios</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="index.php">Registrarte</a>
-                    <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../index.php">Incio</a>
                 </nav>
         </header>
         <div class="row justify-content-center">
@@ -73,28 +70,28 @@
                     </div>
                     <form action="insertarCliente.php" method="POST" class="p-4">
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="nombreCliente" placeholder="Nombre cliente" autofocus>
+                            <input type="text" class="form-control" name="nombreCliente" placeholder="Ingrese su Nombre" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="apellidoCliente" placeholder="apellido cliente" autofocus>
+                            <input type="text" class="form-control" name="apellidoCliente" placeholder="Ingrese su Apellido" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="nitCliente" placeholder="ingrese nit" autofocus>
+                            <input type="text" class="form-control" name="nitCliente" placeholder="Ingrese su NIT" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="direccionCliente" placeholder="ingrese direccion" autofocus>
+                            <input type="text" class="form-control" name="direccionCliente" placeholder="Ingrese su Dirección" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" name="telefonoCliente" placeholder="ingrese numero de telefono" autofocus>
+                            <input type="number" class="form-control" name="telefonoCliente" placeholder="Ingrese su Teléfono" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="correoCliente" placeholder="ingrese correo electronico" autofocus>
+                            <input type="text" class="form-control" name="correoCliente" placeholder="Ingrese su Correo Electrónico" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" name="contrasenia" placeholder="ingrese una contraseña" autofocus>
+                            <input type="password" class="form-control" name="contrasenia" placeholder="Ingrese su Contraseña" autofocus>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" name="confirmarcontrasenia" placeholder="confirme contraseña" autofocus>
+                            <input type="password" class="form-control" name="confirmarcontrasenia" placeholder="Confirmar Contraseña" autofocus>
                         </div>
 
                         <div class="d-grid">

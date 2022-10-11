@@ -1,7 +1,8 @@
 <?php
 //session_start(); 
 include_once("../Conexion/conexion.php");
-
+include_once("../Carrito/funcionesCarrito.php");
+$cart = new Cart;
 if (isset($_POST['correoLogin']) && isset($_POST['passwordLogin'])) {
 
     function validate($data)
@@ -53,12 +54,14 @@ if (isset($_POST['correoLogin']) && isset($_POST['passwordLogin'])) {
 
                 if ($row['id_tipo_usuario_fk'] == 1) {
                     header("Location: ../index.php?u=admin");
+                    $cart->destroy();
                 } elseif ($row['id_tipo_usuario_fk'] == 2) {
                     header("Location: ../index.php?u=manager");
+                    $cart->destroy();
                 }
                 exit();
             } else {
-                header("Location: index.php?error=Incorect User name or password");
+                header("Location: index.php?error=El usuario o la contraseña son incorrectos");
                 exit();
             }
         } elseif (mysqli_num_rows($resultCliente) === 1) {
@@ -68,9 +71,10 @@ if (isset($_POST['correoLogin']) && isset($_POST['passwordLogin'])) {
                 $_SESSION['id_cliente'] = $row['id_cliente'];
 
                 header("Location: ../index.php?u=client&cod=".$row['id_cliente']);
+                $cart->destroy();
             }
         } else {
-            header("Location: index.php?error=Incorect User name or password");
+            header("Location: index.php?error=El usuario o la contraseña son incorrectos");
             exit();
         }
     }

@@ -42,6 +42,31 @@ $accion = mysqli_query($conexion,$consulta);
                     </svg>
                     <span class="fs-4">CasaMúsica</span>
                 </a>
+
+                <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <?php
+                if(isset($_GET['u']) && $_GET['u'] == 'admin'){
+                    $usuario = "admin";
+                ?>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Gestion/index.php?u=<?php echo $_GET['u']?>">Gestion de Articulos</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="index.php?u=<?php echo $_GET['u']?>">Administracion de Usuarios</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Compras/index.php?u=<?php echo $_GET['u']?>">Visualizacion de Compras</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Entregas/index.php?u=<?php echo $_GET['u']?>">Entregas de Compra</a>
+                    <a class="py-2 text-dark text-decoration-none" href="../Login/logout.php">Log out</a>
+                    
+                <?php
+                }elseif(isset($_GET['u']) && $_GET['u'] == 'manager'){
+                    $usuario = "manager";
+                ?>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Gestion/index.php?u=<?php echo $_GET['u']?>">Gestion de Articulos</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Compras/index.php?u=<?php echo $_GET['u']?>">Visualizacion de Compras</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="../Entregas/index.php?u=<?php echo $_GET['u']?>">Entregas de Compra</a>
+                    <a class="py-2 text-dark text-decoration-none" href="../Login/logout.php">Log out</a>
+                <?php
+                }
+                ?>
+                   
+                </nav>
         </header>
         <div class="row justify-content-center">
             <div class="col-md-4">

@@ -50,26 +50,30 @@ else{
                 if (isset($_GET['u']) && $_GET['u'] == 'client') {
                     $usuario = "client";
                 ?>
-                <a class="me-3 py-2 text-dark text-decoration-none" href="Carrito/verCarrito.php?u=<?php echo $usuario?>">Carrito</a>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="Carrito/verCarrito.php?u=<?php echo $_GET['u']?>&cod=<?php echo $_GET['cod']?>">Carrito</a>
                 <a class="py-2 text-dark text-decoration-none" href="Login/logout.php">Log out</a>
                 <?php
                 }elseif(isset($_GET['u']) && $_GET['u'] == 'admin'){
                     $usuario = "admin";
                 ?>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php">Gestion de Articulos</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="Administracion/index.php">Administracion de Usuarios</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php?u=<?php echo $_GET['u']?>">Gestion de Articulos</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Administracion/index.php?u=<?php echo $_GET['u']?>">Administracion de Usuarios</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Compras/index.php?u=<?php echo $_GET['u']?>">Visualizacion de Compras</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Entregas/index.php?u=<?php echo $_GET['u']?>">Entregas de Compra</a>
                     <a class="py-2 text-dark text-decoration-none" href="Login/logout.php">Log out</a>
                     
                 <?php
                 }elseif(isset($_GET['u']) && $_GET['u'] == 'manager'){
                     $usuario = "manager";
                 ?>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php">Gestion de Articulos</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Gestion/index.php?u=<?php echo $_GET['u']?>">Gestion de Articulos</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Compras/index.php?u=<?php echo $_GET['u']?>">Visualizacion de Compras</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Entregas/index.php?u=<?php echo $_GET['u']?>">Entregas de Compra</a>
                     <a class="py-2 text-dark text-decoration-none" href="Login/logout.php">Log out</a>
                 <?php
                 }else{
                 ?>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="Carrito/index.php">Carrito</a>
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="Carrito/verCarrito.php?u=<?php echo $usuario?>&cod=<?php echo $cod?>">Carrito</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="Cliente/index.php">Registrarte</a>
                     <a class="py-2 text-dark text-decoration-none" href="Login/index.php">Sing in</a>
                 <?php

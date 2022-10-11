@@ -85,7 +85,7 @@ $row = mysqli_fetch_array($accion);
                         </div>
                         <br>
                         <div class="d-grid">
-                            <a href="index.php" class="btn btn-secondary">Cancelar</a>
+                            <a href="index.php?u=<?php echo $_GET['u']?>" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </form>
 
