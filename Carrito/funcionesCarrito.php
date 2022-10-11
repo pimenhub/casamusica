@@ -1,5 +1,5 @@
 <?php 
-//session_start();
+session_start();
 class Cart {
 	/**
  	* @var int|array
@@ -88,8 +88,8 @@ class Cart {
                 // re-create the entry with unique identifier and updated quantity
                 $item['rowid'] = $rowid;
                 $item['cantidad_articulo'] += $old_cantidad_articulo;
-                $this->cart_contents[$rowid] = $item;
-                
+                $this->cart_contents[$rowid] = $item;   
+				             
                 // save Cart Item
                 if($this->save_cart()){
                     return isset($rowid) ? $rowid : TRUE;

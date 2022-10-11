@@ -1,13 +1,13 @@
 <?php
 include_once("Conexion/conexion.php");
-$consulta = "SELECT id_articulo, 
+$consulta = $conexion->query("SELECT id_articulo, 
                     nombre_articulo, 
                     precio_articulo, 
                     costo_articulo, 
                     cantidad_articulo, 
                     descripcion_articulo
-            FROM articulo WHERE id_estado_articulo_fk = 1";
-$accion = mysqli_query($conexion, $consulta);
+            FROM articulo WHERE id_estado_articulo_fk = 1");
+//$accion = mysqli_query($conexion, $consulta);
 $usuario = "anonimo";
 if (isset($_GET['cod'])){
     $cod = $_GET['cod'];
@@ -90,32 +90,37 @@ else{
         <main>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
                 <?php
-                while ($row = mysqli_fetch_array($accion)) :
+                while ($row = $consulta->fetch_assoc()){
                 ?>
                     <div class="col">
                         <div class="card mb-4 rounded-3 shadow-sm">
                             <div class="card-header py-3">
-                                <h4 class="my-0 fw-normal"><?= $row['nombre_articulo'] ?></h4>
+                                <h4 class="my-0 fw-normal"><?php echo $row['nombre_articulo'] ?></h4>
                             </div>
                             <div class="card-body">
-                                <h1 class="card-title pricing-card-title">Q.<?= $row['precio_articulo'] ?>
+                                <h1 class="card-title pricing-card-title">Q.<?php echo $row['precio_articulo'] ?>
                                     <!-- <small class="text-muted fw-light">/mo</small> -->
                                 </h1>
-                                <form>
+                                <form action="Carrito/accionCarrito.php" method="POST">
                                 <div class="mb-3">
-                                    <input type="hidden" class="form-control" name="idArticulo" value="<?= $row['id_articulo'] ?>">
+                                    <input type="hidden" class="form-control" name="id_articulo" value="<?php echo $row['id_articulo'] ?>">
+                                    <input type="hidden" class="form-control" name="action" autofocus value="addToCart">
+                                    <input type="hidden" class="form-control" name="u" autofocus value="<?php echo $usuario?>">
+                                    <input type="hidden" class="form-control" name="cod" autofocus value="<?php echo $cod?>">
                                 </div>
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li><img src="Img/music_shop.jpg" width="100" height="100"></li>
                                     <li><?= $row['descripcion_articulo'] ?></li>
                                 </ul>
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-success" value="Agregar al Carrito">                                
+                                </div>
                                 </form>
-                                <a class="btn btn-success" href="Carrito/accionCarrito.php?action=addToCart&id_articulo=<?php echo $row["id_articulo"]; ?>&u=<?php echo $usuario?>&cod=<?php echo $cod?>">Agregar al Carrito</a>
                             </div>
                         </div>
                     </div>
                 <?php
-                endwhile;
+                }
                 ?>
             </div>
         </main>
