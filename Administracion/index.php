@@ -164,10 +164,10 @@ $accion = mysqli_query($conexion,$consulta);
 
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
             <div class="card">
                     <div class="card-header text-white bg-success">
-                        Listado de Articulos
+                        Listado de Usuarios
                     </div>
                     <div class="p-4">
                         <table class="table align-middle">
