@@ -110,6 +110,9 @@ $accion = mysqli_query($conexion,$consulta);
                     </div>
                     <form action="insertarArticulo.php" method="POST" class="p-4">
                         <div class="mb-3">
+                            <input type="hidden" class="form-control" name="u" value="<?php echo $_GET['u']?>" autofocus>
+                        </div> 
+                        <div class="mb-3">
                             <input type="text" class="form-control" name="nombreArticulo" placeholder="Nombre de Articulo" autofocus>
                         </div>
                         <div class="mb-3">
@@ -172,8 +175,8 @@ $accion = mysqli_query($conexion,$consulta);
                                     <td scope="row" align="center"><?= $row['cantidad_articulo'] ?></td>
                                     <td scope="row"><?= $row['descripcion_articulo'] ?></td>
 
-                                    <td><a href="actualizarArticulo.php?codigo=<?= $row['id_articulo'] ?>"><i class="bi bi-pencil-square"></i></a></td>
-                                    <td><a href="eliminarArticulo.php?codigo=<?= $row['id_articulo'] ?>"><i class="bi bi-trash3"></i></a></td>
+                                    <td><a href="actualizarArticulo.php?codigo=<?= $row['id_articulo'] ?>&u=<?php echo $_GET['u']?>"><i class="bi bi-pencil-square"></i></a></td>
+                                    <td><a href="eliminarArticulo.php?codigo=<?= $row['id_articulo'] ?>&u=<?php echo $_GET['u']?>"><i class="bi bi-trash3"></i></a></td>
                                 </tr>
                                 <?php
                                     endwhile;

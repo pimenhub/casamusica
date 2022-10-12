@@ -34,6 +34,9 @@ $row = mysqli_fetch_array($accion);
                     </div>
                     <form action="eliminarUsuario.php" method="POST" class="p-4">
                         <div class="mb-3">
+                            <input type="hidden" class="form-control" name="u" value="<?php echo $_GET['u']?>" autofocus>
+                        </div> 
+                        <div class="mb-3">
                           <input type="hidden" class="form-control" name="idUsuario" value="<?= $row['id_usuario'] ?>">
                           <p>Esta seguro de que desea eliminar el articulo <b><?= $row['id_usuario'] ?></b> <b><?= $row['nombre_usuario'] ?></b></p>
                         </div>
@@ -56,7 +59,7 @@ include_once("../Conexion/conexion.php");
 if(isset($_POST['idUsuario'])){
 
     $idUsuario = $_POST['idUsuario'];
-
+    $usuario = $_POST['u'];
 $consulta = "UPDATE usuario SET
                 id_estado_usuario_fk = 2
                 WHERE id_usuario = $idUsuario";
@@ -64,10 +67,10 @@ $consulta = "UPDATE usuario SET
 $accion = mysqli_query($conexion,$consulta);
 
     if($accion){
-        Header("Location: index.php?r=3");
+        Header("Location: index.php?r=3&u=" . $usuario);
     }
     else{
-        Header("Location: index.php?r=0");
+        Header("Location: index.php?r=0&u=" . $usuario);
         mysqli_close($conexion);
     }
 }

@@ -17,6 +17,7 @@ if (
     $idTipoUsuario = $_POST['idTipoUsuario'];
     $fechaActualizacion = date('Y/m/d', time()); //Validar con zona horario
     $rectificarPassUsuario = $_POST['rectificarPasswordUsuario'];
+    $usuario = $_POST['u'];
 
     if (!empty($passwordUsuario)) {
         if ($passwordUsuario === $rectificarPassUsuario) {
@@ -32,17 +33,17 @@ if (
             $accion = mysqli_query($conexion, $consulta);
 
             if ($accion) {
-                Header("Location: index.php?r=2");
+                Header("Location: index.php?r=2&u=" . $usuario);
             } else {
-                Header("Location: index.php?r=0");
+                Header("Location: index.php?r=0&u=" . $usuario);
                 mysqli_close($conexion);
             }
         } else {
-            Header("Location: index.php?r=4");
+            Header("Location: index.php?r=4&u=" . $usuario);
             //mysqli_close($conexion);
         }
     } else {
-        Header("Location: index.php?r=0");
+        Header("Location: index.php?r=0&u=" . $usuario);
         mysqli_close($conexion);
     }
 } else {

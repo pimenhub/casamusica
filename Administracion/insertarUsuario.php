@@ -11,6 +11,7 @@ $rectificarPassUsuario = $_POST['rectificarPasswordUsuario'];
 $tipoUsuario = $_POST['tipoUsuario'];
 $fechaRegistro = date('Y/m/d', time()); //Validar con zona horaria
 $estadoUsuario = 1;
+$usuario = $_POST['u'];
 
 if (
     isset($nombreUsuario) && isset($apellidoUsuario) && isset($telefonoUsuario)
@@ -34,16 +35,16 @@ if (
         $accion = mysqli_query($conexion, $consulta);
 
         if ($accion) {
-            Header("Location: index.php?r=1");
+            Header("Location: index.php?r=1&u=" . $usuario);
         } else {
-            Header("Location: index.php?r=0");
+            Header("Location: index.php?r=0&u=" . $usuario);
             mysqli_close($conexion);
         }
     } else {
-        Header("Location: index.php?r=4");
+        Header("Location: index.php?r=4&u=" . $usuario);
         mysqli_close($conexion);
     }
 } else {
-    Header("Location: index.php?r=0");
+    Header("Location: index.php?r=0&u=" . $usuario);
     mysqli_close($conexion);
 }

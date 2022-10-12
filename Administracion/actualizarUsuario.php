@@ -45,6 +45,9 @@ $row = mysqli_fetch_array($accion);
                     </div>
                     <form action="actualizarRegistroUsuario.php" method="POST" class="p-4">
                         <div class="mb-3">
+                            <input type="hidden" class="form-control" name="u" value="<?php echo $_GET['u']?>" autofocus>
+                        </div> 
+                        <div class="mb-3">
                             <input type="hidden" class="form-control" name="idUsuario" value="<?= $row['id_usuario'] ?>">
                         </div>
                         <div class="mb-3">

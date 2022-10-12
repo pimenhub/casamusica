@@ -9,6 +9,7 @@ $descripcionArticulo = $_POST['descripcionArticulo'];
 $categoriaArticulo = $_POST['categoriaArticulo'];
 $fechaRegistro = date('Y/m/d', time());//Validar con zona horaria
 $estadoArticulo = 1;
+$usuario = $_POST['u'];
 
 if(isset($nombreArticulo) && isset($precioArticulo) && isset($costoArticulo)
 && isset($cantidadArticulo) && isset($descripcionArticulo) && isset($categoriaArticulo)){
@@ -28,15 +29,16 @@ $consulta = "INSERT INTO articulo
 $accion = mysqli_query($conexion,$consulta);
 
     if($accion){
-        Header("Location: index.php?r=1");
+        Header("Location: index.php?r=1&u=" . $usuario);
+        
     }
     else{
-        Header("Location: index.php?r=0");
+        Header("Location: index.php?r=0&u=" . $usuario);
         mysqli_close($conexion);
     }
 }
 else{
-    Header("Location: index.php?r=0");
+    Header("Location: index.php?r=0&u=" . $usuario);
         mysqli_close($conexion);
 }
 ?>

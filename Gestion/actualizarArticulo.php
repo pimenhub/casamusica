@@ -42,7 +42,10 @@ $row = mysqli_fetch_array($accion);
                     <div class="card-header bg-warning">
                         Actualizar Articulo
                     </div>
-                    <form action="actualizarArticulo.php" method="POST" class="p-4">
+                    <form action="actualizarRegistroArticulo.php" method="POST" class="p-4">
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" name="u" value="<?php echo $_GET['u']?>" autofocus>
+                        </div> 
                         <div class="mb-3">
                             <input type="hidden" class="form-control" name="idArticulo" value="<?= $row['id_articulo'] ?>">
                         </div>
@@ -87,50 +90,3 @@ $row = mysqli_fetch_array($accion);
 </body>
 
 </html>
-
-<?php
-include_once("../Conexion/conexion.php");
-
-
-
-if (
-    isset($_POST['nombreArticulo']) && isset($_POST['precioArticulo']) && isset($_POST['costoArticulo'])
-    && isset($_POST['cantidadArticulo']) && isset($_POST['descripcionArticulo']) && isset($_POST['categoriaArticulo'])
-) {
-
-    $idArticulo = $_POST['idArticulo'];
-    $nombreArticulo = $_POST['nombreArticulo'];
-    $precioArticulo = $_POST['precioArticulo'];
-    $costoArticulo = $_POST['costoArticulo'];
-    $cantidadArticulo = $_POST['cantidadArticulo'];
-    $descripcionArticulo = $_POST['descripcionArticulo'];
-    $categoriaArticulo = $_POST['categoriaArticulo'];
-    $fechaActualizacion = date('Y/m/d', time()); //Validar con zona horaria
-
-    $consulta = "UPDATE articulo SET
-                nombre_articulo = '$nombreArticulo',
-                descripcion_articulo = '$descripcionArticulo',
-                precio_articulo = $precioArticulo,
-                costo_articulo = $costoArticulo,
-                cantidad_articulo = $cantidadArticulo,
-                fecha_actualizado_articulo = '$fechaActualizacion',
-                id_categoria_fk = $categoriaArticulo WHERE id_articulo = $idArticulo";
-
-    $accion = mysqli_query($conexion, $consulta);
-
-    if ($accion) {
-        Header("Location: index.php?r=2");
-    } else {
-        Header("Location: index.php?r=0");
-        mysqli_close($conexion);
-    }
-} else {
-    $idArticulo = null;
-    $nombreArticulo = null;
-    $precioArticulo = null;
-    $costoArticulo = null;
-    $cantidadArticulo = null;
-    $descripcionArticulo = null;
-    $categoriaArticulo = null;
-}
-?>
