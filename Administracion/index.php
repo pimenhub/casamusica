@@ -94,7 +94,7 @@ $accion = mysqli_query($conexion,$consulta);
                     if(isset($_GET['r']) && $_GET['r'] == '2'){
                 ?>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Succes!</strong> Articulo Actualizado Correctamente.
+                    <strong>Succes!</strong> Usuario Actualizado Correctamente.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php
@@ -104,7 +104,7 @@ $accion = mysqli_query($conexion,$consulta);
                     if(isset($_GET['r']) && $_GET['r'] == '3'){
                 ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Succes!</strong> Articulo Eliminado.
+                    <strong>Succes!</strong> Usuario Eliminado.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php
