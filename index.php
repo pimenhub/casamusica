@@ -111,6 +111,7 @@ else{
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li><img src="Img/music_shop.jpg" width="100" height="100"></li>
                                     <li><?= $row['descripcion_articulo'] ?></li>
+                                    <li>Existencia: <?= $row['cantidad_articulo'] ?></li>
                                 </ul>
                                 <div class="mb-3">
                                     <input type="submit" class="btn btn-success" value="Agregar al Carrito">                                

@@ -11,6 +11,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
         $usuario = $_REQUEST['u'];
         $cod = $_REQUEST['cod'];
         // get product details
+        $queryUpdate = $conexion->query("UPDATE articulo SET cantidad_articulo = cantidad_articulo - 1 WHERE id_articulo = $idArticulo");       
         $query = $conexion->query("SELECT id_articulo, 
         nombre_articulo, 
         precio_articulo, 
@@ -24,6 +25,7 @@ FROM articulo WHERE id_estado_articulo_fk = 1
             'id_articulo' => $row['id_articulo'],
             'nombre_articulo' => $row['nombre_articulo'],
             'precio_articulo' => $row['precio_articulo'],
+            'existencia_articulo' => $row['cantidad_articulo'],
             'cantidad_articulo' => 1
         );
 
@@ -39,7 +41,13 @@ FROM articulo WHERE id_estado_articulo_fk = 1
         $updateItem = $cart->update($itemData);
         echo $updateItem ? 'ok' : 'err';
         die;
-    } elseif ($_REQUEST['action'] == 'removeCartItem' && !empty($_REQUEST['id_articulo'])) {
+    } elseif ($_REQUEST['action'] == 'removeCartItem' && !empty($_REQUEST['id_articulo']) && !empty($_REQUEST['ex'])) {
+        
+        $idArticulo = $_REQUEST['id'];
+        $existencia = $_REQUEST['ex'];
+        $queryUpdatePlus = $conexion->query("UPDATE articulo SET cantidad_articulo = cantidad_articulo + $existencia WHERE id_articulo = $idArticulo");   
+
+        
         $deleteItem = $cart->remove($_REQUEST['id_articulo']);
         $usuario = $_REQUEST['u'];
         $cod = $_REQUEST['cod'];

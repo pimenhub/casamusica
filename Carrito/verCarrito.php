@@ -68,6 +68,7 @@ $cod = $_GET['cod'];
                     <thead>
                         <tr>
                             <th>Producto</th>
+                            <th>Existencia</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Sub total</th>
@@ -83,11 +84,15 @@ $cod = $_GET['cod'];
                         ?>
                                 <tr>
                                     <td><?php echo $item["nombre_articulo"]; ?></td>
+                                    <td><?php 
+                                            echo $item["existencia_articulo"]; 
+                                        ?>                                            
+                                    </td>
                                     <td><?php echo 'Q.' . $item["precio_articulo"]; ?></td>
                                     <td><input type="number" class="form-control text-center" disabled value="<?php echo $item["cantidad_articulo"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
                                     <td><?php echo 'Q.' . $item["subtotal"]; ?></td>
                                     <td>
-                                        <a href="accionCarrito.php?action=removeCartItem&id_articulo=<?php echo $item["rowid"]; ?>&u=<?php echo $usuario?>&cod=<?php echo $cod?>" class="btn btn-danger" onclick="return confirm('Confirma eliminar?')"><i class="glyphicon glyphicon-trash"></i>Eliminar</a>
+                                        <a href="accionCarrito.php?action=removeCartItem&id_articulo=<?php echo $item["rowid"]; ?>&u=<?php echo $usuario?>&cod=<?php echo $cod?> &ex=<?php echo $item["cantidad_articulo"]; ?> &id=<?php echo $item["id_articulo"]; ?>" class="btn btn-danger" onclick="return confirm('Confirma eliminar?')"><i class="glyphicon glyphicon-trash"></i>Eliminar</a>
                                     </td>
                                 </tr>
                             <?php }
